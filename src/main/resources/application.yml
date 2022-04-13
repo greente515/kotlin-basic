@@ -1,0 +1,51 @@
+server:
+    address: localhost
+    port: 8080
+
+spring:
+    datasource:
+        master:
+            hikari:
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                jdbc-url: jdbc:mysql://localhost:3306/demo?serverTimezone=UTC&characterEncodig=UTF-8&autoReconnect=true      #jdbc:mysql://[db-host]:[db-port]/[db-schema]
+                username: root
+                password:
+
+                read-only: false
+                connection-test-query: SELECT 1
+                minimum-idle: 10
+                maximum-pool-size: 50
+                max-lifetime: 180000
+                connection-timeout: 30000
+                idel-timeout: 30000
+                transaction-isolation: TRANSACTION_READ_UNCOMMITTED
+                pool-name: masterDbPool
+
+        slave:
+            hikari:
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                jdbc-url: jdbc:mysql://localhost:3306/demo?serverTimezone=UTC&characterEncodig=UTF-8&autoReconnect=true      #jdbc:mysql://[db-host]:[db-port]/[db-schema]
+                username: root
+                password:
+                read-only: true
+                connection-test-query: SELECT 1
+                minimum-idle: 10
+                maximum-pool-size: 50
+                transaction-isolation: TRANSACTION_READ_UNCOMMITTED
+                pool-name: masterDbPool
+
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: mysql
+        show-sql: true
+        open-in-view: false
+        generate-ddl: true
+        hibernate:
+            ddl-auto: create-drop
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   # @Table 의 name 을 대문자로 사용하기 위한 설정
+
+logging:
+    level:
+        org:
+            springframework: debug
