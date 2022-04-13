@@ -7,6 +7,4 @@ interface DemoService {
     fun findAll(): List<Demo>
 
     fun save(demo: Demo): Demo
-
-    fun getDemoCnt(): HashMap<String, Any>
 }

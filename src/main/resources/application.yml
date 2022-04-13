@@ -44,6 +44,12 @@ spring:
             ddl-auto: create-drop
             naming:
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   # @Table 의 name 을 대문자로 사용하기 위한 설정
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
+    main:
+        allow-bean-definition-overriding: true
 
 logging:
     level:

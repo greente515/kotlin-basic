@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/demo")
-class DemoController{
+class DemoController {
 
     private lateinit var demoService: DemoServiceImpl
+
     /**
      * HelloWorld TEST
      */
@@ -38,15 +39,5 @@ class DemoController{
         val res = demoService.save(demo)
 
         return ResponseEntity.ok(res)
-    }
-
-    /**
-     * mybatis demo count sample
-     */
-    @GetMapping("/cnt")
-    fun getDemoCnt(): ResponseEntity<*>{
-        val cnt = demoService.getDemoCnt()
-
-        return ResponseEntity.ok(cnt)
     }
 }

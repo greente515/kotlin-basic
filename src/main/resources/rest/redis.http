@@ -1,0 +1,13 @@
+### resit get
+GET http://localhost:8080/redis-test
+
+### redis post
+POST http://localhost:8080/redis-test
+Content-Type: application/json
+
+{
+    "id": "11",
+    "name": "test22",
+    "email": "test22@test.com",
+    "age": 11
+}
