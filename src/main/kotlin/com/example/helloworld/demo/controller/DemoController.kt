@@ -1,16 +1,15 @@
 package com.example.helloworld.demo.controller
 
 import com.example.helloworld.demo.domain.Demo
-import com.example.helloworld.demo.repository.DemoRepository
+import com.example.helloworld.demo.service.Impl.DemoServiceImpl
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/demo")
-class DemoController(
-    val demoRepository: DemoRepository
-) {
+class DemoController{
 
+    private lateinit var demoService: DemoServiceImpl
     /**
      * HelloWorld TEST
      */
@@ -26,7 +25,7 @@ class DemoController(
      */
     @GetMapping()
     fun getDemos(): ResponseEntity<*> {
-        val demos = demoRepository.findAll()
+        val demos = demoService.findAll()
 
         return ResponseEntity.ok(demos)
     }
@@ -36,8 +35,18 @@ class DemoController(
      */
     @PostMapping()
     fun setDemo(@RequestBody demo: Demo): ResponseEntity<*> {
-        val res = demoRepository.save(demo)
+        val res = demoService.save(demo)
 
         return ResponseEntity.ok(res)
+    }
+
+    /**
+     * mybatis demo count sample
+     */
+    @GetMapping("/cnt")
+    fun getDemoCnt(): ResponseEntity<*>{
+        val cnt = demoService.getDemoCnt()
+
+        return ResponseEntity.ok(cnt)
     }
 }

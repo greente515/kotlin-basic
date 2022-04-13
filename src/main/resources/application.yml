@@ -47,5 +47,9 @@ spring:
 
 logging:
     level:
+        root: INFO
         org:
-            springframework: debug
+            springframework: INFO
+        com:
+            example:
+                helloworld: DEBUG

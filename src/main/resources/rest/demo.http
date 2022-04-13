@@ -6,3 +6,15 @@ GET http://localhost:8080/demo
 
 ### save
 POST http://localhost:8080/demo
+Content-Type: application/json
+
+{
+    "id": 1,
+    "name": "test111",
+    "password": "wfwf",
+    "type": "2",
+    "email": "test@test.com"
+}
+
+### mybatis cnt
+GET http://localhost:8080/demo/cnt
