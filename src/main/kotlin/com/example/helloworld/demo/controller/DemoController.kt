@@ -4,13 +4,13 @@ import com.example.helloworld.demo.domain.Demo
 import com.example.helloworld.demo.service.Impl.DemoServiceImpl
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.xml.ws.Response
 
 @RestController
 @RequestMapping("/demo")
-class DemoController {
-
-    private lateinit var demoService: DemoServiceImpl
-
+class DemoController(
+    private val demoService: DemoServiceImpl
+) {
     /**
      * HelloWorld TEST
      */
@@ -27,8 +27,10 @@ class DemoController {
     @GetMapping()
     fun getDemos(): ResponseEntity<*> {
         val demos = demoService.findAll()
+        val data = HashMap<String, Any>()
+        data["list"] = demos
 
-        return ResponseEntity.ok(demos)
+        return ResponseEntity.ok(data)
     }
 
     /**
@@ -37,6 +39,16 @@ class DemoController {
     @PostMapping()
     fun setDemo(@RequestBody demo: Demo): ResponseEntity<*> {
         val res = demoService.save(demo)
+
+        return ResponseEntity.ok(res)
+    }
+
+    /**
+     * querydsl
+     */
+    @GetMapping("/{id}")
+    fun getDemoDetails(@PathVariable id: Long): ResponseEntity<*> {
+        val res = demoService.getDemoDetails(id)
 
         return ResponseEntity.ok(res)
     }

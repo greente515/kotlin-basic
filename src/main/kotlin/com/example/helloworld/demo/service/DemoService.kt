@@ -7,4 +7,6 @@ interface DemoService {
     fun findAll(): List<Demo>
 
     fun save(demo: Demo): Demo
+
+    fun getDemoDetails(id: Long): Demo?
 }

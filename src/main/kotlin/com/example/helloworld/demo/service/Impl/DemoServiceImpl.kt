@@ -20,4 +20,8 @@ class DemoServiceImpl(
     override fun save(demo: Demo): Demo {
         return demoRepository.save(demo)
     }
+
+    override fun getDemoDetails(id: Long): Demo? {
+        return demoRepository.getDemoDetails(id)
+    }
 }

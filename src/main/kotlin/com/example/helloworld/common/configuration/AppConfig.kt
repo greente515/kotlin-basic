@@ -1,4 +1,4 @@
-package com.example.helloworld.common.config
+package com.example.helloworld.common.configuration
 
 import org.springframework.context.annotation.Configuration
 

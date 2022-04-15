@@ -8,8 +8,8 @@ plugins {
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"    //코틀린 언어로 스프링을 사용
     kotlin("plugin.jpa") version "1.6.10"   //JPA 사용
-//    id("org.jlleitschuh.gradle.ktlint") version "10.0.0"    //ktlint-gradle
-//    id("org.jlleitschuh.gradle.ktlint-idea") version "10.0.0"
+    kotlin("kapt") version "1.6.10" //kapt annotation processing for kotlin (코틀린이 자바의 어노테이션을 처리할 때 kotlin 파일의 어노테이션 처리를 포함, JVM 기동 시 kotlin 의 어노테이션을 포함)
+    idea
 }
 
 allOpen {
@@ -47,6 +47,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc") //db connect
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2") // Mybatis
     implementation("org.springframework.boot:spring-boot-starter-data-redis") // redis
+    implementation("com.querydsl:querydsl-jpa") //querydsl
+    implementation("com.querydsl:querydsl-apt") //querydsl
+    kapt("com.querydsl:querydsl-apt:5.0.0:jpa") //querydsl
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -56,6 +59,7 @@ dependencies {
 //    runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa") //entity 가 선언되어 있는 클래스를 QClass 로 생성, default 로 build 폴더 하위 생성)
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -70,16 +74,17 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-// task 추가 - main bootRun
-//tasks.getByName<BootRun>("bootRun") {
-//    main = "com.example.helloworld.HelloWorldApplicationKt" // MainClass 경로
-//}
+idea{
+    module{
+        val kaptMain = file("build/generated/source/kapt/main")
+        sourceDirs.add(kaptMain)
+        generatedSourceDirs.add(kaptMain)
+    }
+}
 
-//tasks.test {
-//    outputs.dir(snippetsDir)
-//}
-
-//tasks.asciidoctor {
-//    inputs.dir(snippetsDir)
-//    dependsOn(test)
-//}
+//query dsl
+//build 폴더 하위에 생성된 QClass 를 프로젝트 내부에서 impoort 할 수 있도록 도와주는 설정
+tasks.register("generatedQueryDsl") {
+    dependsOn(tasks.clean)
+    dependsOn(tasks.compileKotlin)
+}

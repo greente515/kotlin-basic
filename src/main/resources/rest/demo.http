@@ -18,3 +18,6 @@ Content-Type: application/json
 
 ### mybatis cnt
 GET http://localhost:8080/demo/cnt
+
+### querydsl
+GET http://localhost:8080/demo/{{id}}
