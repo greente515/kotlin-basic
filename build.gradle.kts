@@ -47,8 +47,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc") //db connect
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2") // Mybatis
     implementation("org.springframework.boot:spring-boot-starter-data-redis") // redis
+    implementation("org.springframework.boot:spring-boot-starter-cache")    //redis
+    implementation("org.apache.commons:commons-pool2")  //redis
     implementation("com.querydsl:querydsl-jpa") //querydsl
-    implementation("com.querydsl:querydsl-apt") //querydsl
+    implementation("com.querydsl:querydsl-apt")
+    implementation("org.projectlombok:lombok:1.18.22") //querydsl
     kapt("com.querydsl:querydsl-apt:5.0.0:jpa") //querydsl
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

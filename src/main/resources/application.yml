@@ -51,6 +51,17 @@ spring:
     redis:
         host: 127.0.0.1
         port: 6379
+        expire: 86400   #60 * 60 * 34
+        lettuce:
+            pool:
+                max-active: 15
+                max-idle: 8
+                min-idle: 3
+                max-wait: -1
+            shutdown-timeout: 2000
+        timeout: 3000
+    cache:
+      type: redis
 
     main:
         allow-bean-definition-overriding: true

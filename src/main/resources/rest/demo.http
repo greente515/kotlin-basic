@@ -1,10 +1,10 @@
-### hello world
+### hello world test
 GET http://localhost:8080/demo/hello
 
-### findAll
+### findAll jpa test
 GET http://localhost:8080/demo
 
-### save
+### save jpa test
 POST http://localhost:8080/demo
 Content-Type: application/json
 
@@ -16,8 +16,11 @@ Content-Type: application/json
     "email": "test@test.com"
 }
 
-### mybatis cnt
+### mybatis cnt test
 GET http://localhost:8080/demo/cnt
 
-### querydsl
+### querydsl test
 GET http://localhost:8080/demo/{{id}}
+
+### redis test
+GET http://localhost:8080/redis-test/{{id}}

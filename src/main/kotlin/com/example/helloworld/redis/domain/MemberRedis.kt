@@ -1,4 +1,4 @@
-package com.example.helloworld.demo.domain
+package com.example.helloworld.redis.domain
 
 import org.springframework.data.redis.core.RedisHash
 import javax.persistence.Id
